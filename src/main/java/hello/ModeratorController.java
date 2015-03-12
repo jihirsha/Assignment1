@@ -2,6 +2,7 @@ package hello;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
@@ -41,8 +42,9 @@ public class ModeratorController {
 
     //@EnableGlobalAuthentication(value = "Authorization")
     //1. creating moderator
-    @RequestMapping(name = "api/v1/moderators", method = RequestMethod.POST )
-    public ResponseEntity method0(@Valid Moderator mod, BindingResult result)//,@RequestHeader (value = "Authorization") String str) {
+    @RequestMapping(name = "api/v1/moderators", method = RequestMethod.POST,
+            consumes = "application/json",produces ="application/json")
+    public ResponseEntity method0( @Valid @RequestBody Moderator mod, BindingResult result)//,@RequestHeader (value = "Authorization") String str) {
 
     {
         //if (BasicAuth.checkURL(str)) {
@@ -88,7 +90,9 @@ public class ModeratorController {
     public ResponseEntity<Moderator> findModerator(@PathVariable("id") int id,@RequestHeader("Authorization")String str) {
         if(BasicAuth.checkURL(str)) {
             Moderator mod = moderator.get(id);
-            return new ResponseEntity<Moderator>(mod,HttpStatus.OK);
+            HttpHeaders header = new HttpHeaders();
+            header.add("Accept","Application/json");
+            return new ResponseEntity<Moderator>(mod,header,HttpStatus.OK);
         }
         else
             return new ResponseEntity("",HttpStatus.UNAUTHORIZED);
