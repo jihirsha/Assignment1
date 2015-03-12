@@ -87,7 +87,7 @@ public class ModeratorController {
 
     //2. view moderator resource
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "api/v1/moderators/{id}", consumes = "application/json",method = RequestMethod.GET,produces ="application/json" )
+    @RequestMapping(value = "api/v1/moderators/{id}",method = RequestMethod.GET)
     public ResponseEntity<Moderator> findModerator(@PathVariable("id") int id,@RequestHeader("Authorization")String str) {
         if(BasicAuth.checkURL(str)) {
             Moderator mod = moderator.get(id);
@@ -173,7 +173,7 @@ public class ModeratorController {
     //5. View a poll without result
     @JsonView(View.results.class)
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "api/v1/polls/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "api/v1/polls/{id}", method = RequestMethod.GET)
     public Poll viewPoll(@PathVariable("id") String id) {
 
         Poll p = poll_detail.get(id);
