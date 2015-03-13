@@ -175,10 +175,10 @@ public class ModeratorController {
 
     @RequestMapping(value = "api/v1/polls/{id}", method = RequestMethod.GET)
     public ResponseEntity viewPoll(@PathVariable("id") String id) {
-        HttpHeaders header = new HttpHeaders();
-        header.add("Accept","application/json");
+        //HttpHeaders header = new HttpHeaders();
+        //header.add("Accept","application/json");
         Poll p = poll_detail.get(id);
-        return new ResponseEntity(p,header,HttpStatus.OK);
+        return new ResponseEntity(p,HttpStatus.OK);
     }
 
     //6. View a poll with result
