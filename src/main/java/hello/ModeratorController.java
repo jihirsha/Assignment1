@@ -172,7 +172,7 @@ public class ModeratorController {
 
     //5. View a poll without result
     @JsonView(View.results.class)
-    @ResponseStatus(HttpStatus.OK)
+
     @RequestMapping(value = "api/v1/polls/{id}", method = RequestMethod.GET)
     public Poll viewPoll(@PathVariable("id") String id) {
 
